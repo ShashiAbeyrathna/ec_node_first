@@ -10,12 +10,13 @@ module.exports = (sequelize, Sequelize) =>{
         vehicle_type:{
              type:Sequelize.STRING,
              allowNull:false,
-             unique:true,
+             
 
          },
          status:{
             type: Sequelize.ENUM,
-            values: ['active', 'pending', 'deleted']
+            values: ['active', 'pending', 'deleted'],
+            allowNull:false,
 
          }
          

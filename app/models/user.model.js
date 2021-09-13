@@ -21,7 +21,8 @@ module.exports = (sequelize, Sequelize) =>{
          },
          status:{
             type: Sequelize.ENUM,
-            values: ['active', 'pending', 'deleted']
+            values: ['active', 'pending', 'deleted'],
+            allowNull:false,
 
          }
          
