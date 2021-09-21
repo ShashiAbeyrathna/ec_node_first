@@ -2,10 +2,10 @@ module.exports = (sequelize, Sequelize) =>{
     const Role = sequelize.define("role",{
         id:{
             type: Sequelize.INTEGER,
-            allowNull:false,
             unique:true,
             primaryKey:true,
-            autoIncrement:true
+            autoIncrement:true,
+            allowNull:false,
          },
          role_name:{
              type:Sequelize.STRING,
@@ -14,9 +14,9 @@ module.exports = (sequelize, Sequelize) =>{
          },
          status:{
             type: Sequelize.ENUM,
-            values: ['active', 'pending', 'deleted'],
+            values: ['active', 'inactive'],
+            defaultValue: 'inactive',
             allowNull:false,
-
          }
          
 
