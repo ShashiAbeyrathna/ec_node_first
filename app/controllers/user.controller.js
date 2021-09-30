@@ -1,4 +1,7 @@
 const db = require('../models');
+require('dotenv').config();
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
 const User = db.user;
 
 
@@ -27,9 +30,23 @@ exports.getAllUsers = (req, res) => {
 }
 
 exports.createUser = async (req, res) => {
+
+    //validation
+    if(!req.body.user_name || !req.body.password){
+        res.status(404)
+        .send({
+            status:false,
+            message:"user name and password can not be empty"
+
+        });
+    }
+
+    const password = req.body.password;
+    const encryptedPassword = await bcrypt.hash(password,saltRounds);
+
     const user = {
         user_name: req.body.user_name,
-        password: req.body.password,
+        password: encryptedPassword,
         status: req.body.status,
     }
     await User.create(user)
