@@ -7,6 +7,7 @@ const userRoute = require('./app/routes/user.route');
 const roleRoute = require('./app/routes/role.route');
 const vehicleRoute = require('./app/routes/vehicle.route');
 const userdetailsRoute = require('./app/routes/userdetails.route');
+const authRoute = require('./app/routes/auth.route');
 
 app.use(cors());
 app.use(express.json());
@@ -17,6 +18,9 @@ db.sequelize.sync({force: false})
     console.log('Database and table creates');
 });
 
+//middleware 
+const { veryfyToken } = require ('./app/middlewares/auth.middleware')
+
 // app.get('/',(req,res)=>{
 //     res.send("Welcome to my Server");
 // });
@@ -24,7 +28,8 @@ db.sequelize.sync({force: false})
 app.use('/user',userRoute);
 app.use('/role',roleRoute);
 app.use('/userdetails',userdetailsRoute);
-app.use('/vehicle',vehicleRoute);
+app.use('/vehicle',veryfyToken,vehicleRoute);
+app.use('/auth',authRoute);
 
 
 
